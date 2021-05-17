@@ -1,0 +1,28 @@
+{
+  "name": "scraping-toolbox",
+  "version": "1.0.0",
+  "description": "Common lib & utils for our web scrappers",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/ava/cli.js --verbose",
+    "test-watch": "node_modules/ava/cli.js --verbose --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luispablo/scraping-toolbox.git"
+  },
+  "author": "@luispablo",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/luispablo/scraping-toolbox/issues"
+  },
+  "homepage": "https://github.com/luispablo/scraping-toolbox#readme",
+  "dependencies": {
+    "ava": "^3.15.0"
+  },
+  "ava": {
+    "files": [
+      "test/**/*-test.js"
+    ]
+  }
+}
