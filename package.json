@@ -1,6 +1,6 @@
 {
   "name": "scraping-toolbox",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Common lib & utils for our web scrappers",
   "main": "index.js",
   "scripts": {

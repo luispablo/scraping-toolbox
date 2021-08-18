@@ -5,7 +5,7 @@ const test = require("ava");
 
 test.before(async function (t) {
   await rmdir("./test/cache", { recursive: true });
-  const cache = await buildCache("./test");
+  const cache = await buildCache({ path: "./test" });
   const res1 = { headers: () => ({ "Content-Type": "text/plain" }), text: () => "js file content" };
   const req1 = { url: () => "https://www.socmed.com/static/yourfile.js", response: () => res1 };
   const req1Filename = `./test/cache/${req1.url().replace(/\//g, "_")}`;

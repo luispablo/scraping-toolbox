@@ -6,8 +6,7 @@ Common lib &amp; utils for our web scrappers
 ```javascript
 const { buildCache } = require("scraping-toolbox");
 
-// If path not specified, will use root directory to host the hidden .tt-collie temp directory
-const cache = await buildCache("/opt/mytempdirs");
+const cache = await buildCache({ path: "/opt/mytempdirs" });
 
 // You can clear the cache before start using it to prevent keeping old content
 await cache.clear();
@@ -18,6 +17,12 @@ const cachedResponse = await cache.get(req);
 // And then you can respond with this cached item
 req.respond(cachedResponse);
 ```
+
+### Settings
+
+These are all optional
+
+- ```path``` - where to host the hidden .tt-collie temp directory; if not specified it will use root directory
 
 ## pptr
 
