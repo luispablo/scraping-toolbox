@@ -6,13 +6,14 @@ Common lib &amp; utils for our web scrappers
 ```javascript
 const { buildCache } = require("scraping-toolbox");
 
-const cache = await buildCache({ path: "/opt/mytempdirs" });
+const exceptions = ["very-important1.js", "very-important2.js"];
+const cache = await buildCache({ path: "/opt/mytempdirs", exceptions });
 
 // You can clear the cache before start using it to prevent keeping old content
 await cache.clear();
 
 const isRequestCached = await cache.contains(req); // req is a Puppeteer HTTPRequest object
-if (!isRequestCached) await cache.add(req);
+if (!isRequestCached) await cache.add(req); // Won't be added if it's in 'exceptions'!
 const cachedResponse = await cache.get(req);
 // And then you can respond with this cached item
 req.respond(cachedResponse);
@@ -23,6 +24,7 @@ req.respond(cachedResponse);
 These are all optional
 
 - ```path``` - where to host the hidden .tt-collie temp directory; if not specified it will use root directory
+- ```exceptions``` - URL parts to exclude (indexOf >= 0) So when invoking ```add``` if it meets any of these exceptions **it won't be added**
 
 ## pptr
 
