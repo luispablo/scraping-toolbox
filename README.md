@@ -43,3 +43,41 @@ const { wait } = require("scraping-toolbox");
 // Wait 80ms, plus a random number between 0 and 20 additional milliseconds
 await wait(80, 20); 
 ```
+
+## Click and wait
+
+Click on an XPath defined item, and wait for another XPath defined item to appear, retrying n times before failing on too many retries.
+
+```javascript
+const { clickAndWait } = require("scraping-toolbox");
+
+const clickableItemXPath = "//div[.='opi']//ancestor::a[contains(@href, 'opi')]";
+const waitForItemXPath = "//main//header//h2[.='opi']";
+const retries = 5;
+await clickAndWait(page, clickableItemXPath, waitForItemXPath, retries);
+```
+
+## Scroll to bottom
+
+Scroll down the browser page, reaching bottom. It can keep scrolling if more content is loaded when approaching the bottom (infinite scroll) or not, based on a parameter.
+
+```javascript
+const { scrollPageToBottom } = require("scraping-toolbox");
+
+const scrollStep = 350; // How much to move on each step (default 200)
+const scrollDelay = 2000; // Milliseconds to wait between each scrolling step (default 1000)
+await scrollPageToBottom({ page, scrollStep, scrollDelay, infinite: false });
+```
+
+Both ```scrollStep``` and ```scrollDelay``` are randomized for each iteration, to mimic human behavior.
+
+## Type like a human
+
+Types in, character by character, using a randomized wait between each one: 120 ms + 60 ms * random.
+
+```javascript
+const { humanType } = require("scraping-toolbox");
+
+const [searchInput] = await page.$x("//nav//input[@type='text']");
+await humanType(searchInput, "some_username");
+```
