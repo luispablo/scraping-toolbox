@@ -28,11 +28,23 @@ These are all optional
 
 ## pptr
 
+### Get an element property value
+
 ```javascript
 const { pptr } = require("scraping-toolbox");
 
 const [anchor] = await page.$x("//a");
-const href = await prop(anchor, "href");
+const href = await pptr.prop(anchor, "href");
+```
+
+### Close (but REALLY close) the browser
+
+It closes all pages, the browser, kills the process (if needed) and removes all temporary files.
+
+```javascript
+const { pptr } = require("scraping-toolbox");
+
+await pptr.close(browser);
 ```
 
 ## wait
