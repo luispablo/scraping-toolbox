@@ -83,13 +83,28 @@ await scrollPageToBottom({ page, scrollStep, scrollDelay, infinite: false });
 
 Both ```scrollStep``` and ```scrollDelay``` are randomized for each iteration, to mimic human behavior.
 
-## Type like a human
+## Human-like operations
+
+These operations mimic human behavior.
+
+### Typing
 
 Types in, character by character, using a randomized wait between each one: 120 ms + 60 ms * random.
 
 ```javascript
-const { humanType } = require("scraping-toolbox");
+const { human } = require("scraping-toolbox");
 
 const [searchInput] = await page.$x("//nav//input[@type='text']");
-await humanType(searchInput, "some_username");
+await human.type(searchInput, "some_username");
+```
+
+### Deleting input text content
+
+Similar to typing.
+
+```javascript
+const { human } = require("scraping-toolbox");
+
+const [searchInput] = await page.$x("//nav//input[@type='text']");
+await human.deleteText(searchInput);
 ```
