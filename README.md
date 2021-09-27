@@ -108,3 +108,11 @@ const { human } = require("scraping-toolbox");
 const [searchInput] = await page.$x("//nav//input[@type='text']");
 await human.deleteText(searchInput);
 ```
+
+### Scrolling
+
+```javascript
+const { human } = require("scraping-toolbox");
+const scroller = human.createScroller(page); // Creates a scroller with random mouse wheel or keyboard feature
+await scroller.move("down"); // Or "up"; randomly moves in the given direction
+```
