@@ -58,15 +58,19 @@ await wait(80, 20);
 
 ## Click and wait
 
-Click on an XPath defined item, and wait for another XPath defined item to appear, retrying n times before failing on too many retries.
+Click on an XPath defined item, and wait for another XPath defined item (or items!) to appear, retrying n times before failing on too many retries.
 
 ```javascript
 const { clickAndWait } = require("scraping-toolbox");
 
 const clickableItemXPath = "//div[.='opi']//ancestor::a[contains(@href, 'opi')]";
-const waitForItemXPath = "//main//header//h2[.='opi']";
+const waitForItemXPath1 = "//main//header//h2[.='opi']";
 const retries = 5;
-await clickAndWait(page, clickableItemXPath, waitForItemXPath, retries);
+const waitedElement = await clickAndWait(page, clickableItemXPath, waitForItemXPath1, retries);
+
+// You can also wait for any of n possible items, will return the first it finds
+const waitForItemXPath2 = "//main//header//h2[.='other-item']";
+const anyWaitedElement = await clickAndWait(page, clickableItemXPath, [waitForItemXPath1, waitForItemXPath2]);
 ```
 
 ## Scroll to bottom

@@ -21,8 +21,12 @@
     "ava": "^3.15.0"
   },
   "ava": {
+    "timeout": "5m",
     "files": [
       "test/**/*.test.js"
     ]
+  },
+  "devDependencies": {
+    "puppeteer": "^10.4.0"
   }
 }
