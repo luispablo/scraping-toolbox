@@ -28,6 +28,20 @@ These are all optional
 
 ## pptr
 
+### Launch new browser instance
+
+This function internally uses the modules **puppeteer-extra-plugin-stealth** and **proxy-chain** to help in the anonimization and preventing the proxy detection.
+
+```javascript
+  const { pptr } = require("scraping-toolbox");
+
+  const proxy = { url: "http://yourproxyserver.com", username: "yourproxyuser", password: "yourproxypass" };
+  const { browser, page } = await pptr.launch(proxy, { debug: true, timeout: 120 });
+```
+
+- ```debug``` is optional, **false** by default
+- ```timeout``` 60 seconds by default
+
 ### Get an element property value
 
 ```javascript
