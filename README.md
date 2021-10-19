@@ -120,3 +120,30 @@ const { human } = require("scraping-toolbox");
 const scroller = human.createScroller(page); // Creates a scroller with random mouse wheel or keyboard feature
 await scroller.move("down"); // Or "up"; randomly moves in the given direction
 ```
+
+## Testing tools
+
+### retryTest
+
+Using chrome / Puppeteer, specially through proxies, usually generates random errors, timeouts, etc. This complicates unit testing.
+
+To prevent such issues from breaking your unit tests, you can send your desired test as a function to this helper:
+
+```js
+const { retryTest } = require("scraping-toolbox");
+
+const isRetryable = err => err && err.message === "This should be retried!";
+
+test("Some feature you want to test", async function (t) {
+  await retryTest(async function () {
+    const { page } = t.context;
+    await page.goto("https://somewebsite.co");
+    t.is(somevar, "someresult");
+  }, { retries: 5, isRetryable });
+});
+```
+
+The second parameter are optional settings:
+
+- ```retries``` is 3 by default
+- ```isRetryable``` by default if an error has **ERR_TIMED_OUT** or **Navigation timeout** in its message will be retried
