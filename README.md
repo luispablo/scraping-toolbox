@@ -7,7 +7,7 @@ Common lib &amp; utils for our web scrappers
 const { buildCache } = require("scraping-toolbox");
 
 const exceptions = ["very-important1.js", "very-important2.js"];
-const cache = await buildCache({ path: "/opt/mytempdirs", exceptions });
+const cache = await buildCache({ path: "/opt/mytempdirs", exceptions, maxAge: 300000 });
 
 // You can clear the cache before start using it to prevent keeping old content
 await cache.clear();
@@ -25,6 +25,7 @@ These are all optional
 
 - ```path``` - where to host the hidden .tt-collie temp directory; if not specified it will use root directory
 - ```exceptions``` - URL parts to exclude (indexOf >= 0) So when invoking ```add``` if it meets any of these exceptions **it won't be added**
+- ```maxAge``` - Maximum cache entry age in millis (defaults to **21600000** = 6 hours) After this time the cache entry is discarded
 
 ## pptr
 
