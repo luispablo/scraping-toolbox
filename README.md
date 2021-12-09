@@ -12,6 +12,7 @@ const cache = await buildCache({ path: "/opt/mytempdirs", exceptions, maxAge: 30
 // You can clear the cache before start using it to prevent keeping old content
 await cache.clear();
 
+// If you want an EXACT name match (**)
 const isRequestCached = await cache.contains(req); // req is a Puppeteer HTTPRequest object
 if (!isRequestCached) await cache.add(req); // Won't be added if it's in 'exceptions'!
 const cachedResponse = await cache.get(req);
@@ -26,6 +27,27 @@ These are all optional
 - ```path``` - where to host the hidden .tt-collie temp directory; if not specified it will use root directory
 - ```exceptions``` - URL parts to exclude (indexOf >= 0) So when invoking ```add``` if it meets any of these exceptions **it won't be added**
 - ```maxAge``` - Maximum cache entry age in millis (defaults to **21600000** = 6 hours) After this time the cache entry is discarded
+
+### ** cache similar names instead of exact name match 
+
+```javascript
+const requestMatches = await cache.matches(req);
+
+// This would return something like:
+// [
+//   { filename: "https:__lf16-tiktok-web.ttwstatic.com_obj_tiktok-web_tiktok_webapp_login_common_vendor.0992bd4f.js", score: 0.9411764705882353, isExpired: false },
+//   { filename: "https:__lf16-tiktok-web.ttwstatic.com_obj_tiktok-web_tiktok_webapp_login_index.685d65b6.js", score: 0.8125, isExpired: false },
+//   { filename: "https:__sf16-unpkg-va.ibytedtos.com_slardar_sdk-lite_0.4.9_dist_plugins_perf.0.4.9.maliva.js", score: 0.14285714285714285, isExpired: false },
+// ];
+// and you could consider any match with a score over 0.9 / 0.95, and take the highest score of them. No match above 0.9 would be no match at all.
+
+const validMatches = requestMatches.filter(m => m.score > 0.9);
+if (validMatches.length > 0) {
+  const match = maxBy(validMatches, "score");
+} else {
+  // no match!
+}
+```
 
 ## pptr
 
