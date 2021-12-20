@@ -169,7 +169,7 @@ To prevent such issues from breaking your unit tests, you can send your desired 
 ```js
 const { retryTest } = require("scraping-toolbox");
 
-const isRetryable = err => err && err.message === "This should be retried!";
+const isRetryable = err => err && err.message === "This should be retried too!"; // You can define ADITIONAL retrying conditions
 
 test("Some feature you want to test", async function (t) {
   await retryTest(async function () {

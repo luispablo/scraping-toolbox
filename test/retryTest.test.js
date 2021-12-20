@@ -49,7 +49,8 @@ test("Custom retryable error", async function (t) {
   try {
     await retryTest(async function () {
       retries++;
-      throw new Error("Custom retryable");
+      if (retries === 0) throw new Error("Custom retryable");
+      else throw new Error("ERR_TIMED_OUT");
     }, { isRetryable: err => err.message === "Custom retryable" });
     t.fail("Shouldn't get here");
   } catch (err) {
