@@ -20,14 +20,19 @@ test("Retry twice", async function (t) {
 
 test("Retry more than default", async function (t) {
   let retries = 0;
+  const retryableMessages = [
+    "ERR_TIMED_OUT",
+    "Response body is unavailable for redirect responses",
+    "Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.",
+  ];
   try {
     await retryTest(async function () {
       retries++;
-      throw new Error("ERR_TIMED_OUT");
-    });
+      throw new Error(retryableMessages[retries - 1]);
+    }, { retries: 5 });
     t.fail("Shouldn't get here");
   } catch (err) {
-    t.is(retries, 3);
+    t.is(retries, 4);
   }
 });
 
