@@ -20,7 +20,7 @@
   "dependencies": {
     "ava": "^3.15.0",
     "proxy-chain": "^1.0.4",
-    "puppeteer": "^10.4.0",
+    "puppeteer": "^13.1.2",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.9.0"
   },
