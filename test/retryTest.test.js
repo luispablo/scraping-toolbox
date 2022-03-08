@@ -24,15 +24,16 @@ test("Retry more than default", async function (t) {
     "ERR_TIMED_OUT",
     "Response body is unavailable for redirect responses",
     "Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.",
+    "Navigation failed because browser has disconnected!"
   ];
   try {
     await retryTest(async function () {
       retries++;
       throw new Error(retryableMessages[retries - 1]);
-    }, { retries: 5 });
+    }, { retries: 6 });
     t.fail("Shouldn't get here");
   } catch (err) {
-    t.is(retries, 4);
+    t.is(retries, 5);
   }
 });
 

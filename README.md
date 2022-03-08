@@ -183,4 +183,4 @@ test("Some feature you want to test", async function (t) {
 The second parameter are optional settings:
 
 - ```retries``` is 3 by default
-- ```isRetryable``` by default if an error has **ERR_TIMED_OUT**, **Navigation timeout**, **Cannot read property \'getProperty\' of undefined**, **Response body is unavailable for redirect responses** or **Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.** in its message will be retried
+- ```isRetryable``` by default if an error has **ERR_TIMED_OUT**, **Navigation timeout**, **Cannot read property \'getProperty\' of undefined**, **Response body is unavailable for redirect responses**, **Navigation failed because browser has disconnected!** or **Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.** in its message will be retried
