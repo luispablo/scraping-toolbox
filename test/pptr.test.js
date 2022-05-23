@@ -15,7 +15,7 @@ test.before(async function (t) {
 test("Launch new browser", async function (t) {
   const { debug, proxy } = t.context;
   const { browser, page } = await pptr.launch(proxy, { debug });
-  await page.goto("https://www.google.com");
+  await page.goto("https://duckduckgo.com/");
   const [input] = await page.$x("//input[@type = 'text']");
   t.is(typeof(browser.process().pid), "number");
   t.truthy(input);
