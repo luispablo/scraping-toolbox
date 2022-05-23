@@ -38,10 +38,10 @@ test("Wait for any of n elements", async function (t) {
   await page.goto("https://www.muylinux.com/");
   const [cookiesButton] = await page.$x("//button[. = 'ACEPTO']");
   if (cookiesButton) await cookiesButton.click();
-  const waitedElements = ["//p[@id = 'INVALID-ID']", "//p[@class = 'entry-tags']"];
-  const element = await clickAndWait(page, "//div[@id = 'page']//article//h2//a[@rel = 'bookmark']", waitedElements);
+  const waitedElements = ["//p[@id = 'INVALID-ID']", "//header//div[@class = 'zox-post-info-wrap']"];
+  const element = await clickAndWait(page, "//div[@class = 'zox-art-title']//a[@rel = 'bookmark']", waitedElements);
   const className = await (await element.getProperty("className")).jsonValue();
-  t.is(className, "entry-tags");
+  t.is(className, "zox-post-info-wrap");
   await page.close();
 });
 
