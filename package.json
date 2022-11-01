@@ -19,10 +19,10 @@
   "homepage": "https://github.com/luispablo/scraping-toolbox#readme",
   "dependencies": {
     "ava": "^4.3.0",
-    "proxy-chain": "^1.0.4",
-    "puppeteer": "^13.1.2",
-    "puppeteer-extra": "^3.2.3",
-    "puppeteer-extra-plugin-stealth": "^2.9.0"
+    "proxy-chain": "^2.2.0",
+    "puppeteer": "^19.2.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-stealth": "^2.11.1"
   },
   "ava": {
     "timeout": "5m",
